@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 # Set options
 options = ChromeOptions()
-options.add_argument("--headless")
+# options.add_argument("--headless")
 
 #driver settings
 driver = webdriver.Chrome(options=options)
@@ -26,6 +26,12 @@ class Driver:
     # Gets the title of a webpage
     def getTitle(self):
         print(self.driver.title)
+
+    def checkTitle(self,title):
+        if title == self.driver.title:
+            print("Yes! The correct title is " + title)
+        else:
+            print("The title " + title + " is incorrect.")
     
     # Only checks button & input of type submit
     def checkClick(self, element):
@@ -60,7 +66,7 @@ class Driver:
     # Checks for the availability of an element in a page
     def checkElement(self,elem,i):
         match elem:
-            case "ID":
+            case "id":
                 try:
                     e = self.driver.find_element(By.ID, i)
                     print("The element with ID '" + i + "' is available.")
@@ -68,7 +74,7 @@ class Driver:
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "NAME":
+            case "name":
                 try:
                     e = self.driver.find_element(By.NAME, i)
                     print("The element with name '" + i + "' is available.")
@@ -76,23 +82,39 @@ class Driver:
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "CLASS_NAME":
+            case "pname":
+                try:
+                    e = self.driver.find_elements(By.NAME, i)
+                    print("The elements with name '" + i + "' is available.")
+                    return e
+                except NoSuchElementException as err:
+                    print("Exception: " + err.msg)
+            
+            case "class":
                 try:
                     e = self.driver.find_element(By.CLASS_NAME, i)
                     print("The element with class name '" + i + "' is available.")
                     return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
-            
-            case "TAG_NAME":
+
+            case "pclass":
                 try:
-                    e = self.driver.find_element(By.TAG_NAME, i)
-                    print("The element with tag name '" + i + "' is available.")
+                    e = self.driver.find_elements(By.CLASS_NAME, i)
+                    print("The elements with class name '" + i + "' is available.")
                     return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "LINK_TEXT":
+            case "tag":
+                try:
+                    e = self.driver.find_elements(By.TAG_NAME, i)
+                    print("The elements with tag name '" + i + "' is available.")
+                    return e
+                except NoSuchElementException as err:
+                    print("Exception: " + err.msg)
+            
+            case "link_text":
                 try:
                     e = self.driver.find_element(By.LINK_TEXT, i)
                     print("The element with link text '" + i + "' is available.")
@@ -100,7 +122,7 @@ class Driver:
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "PARTIAL_LINK_TEXT":
+            case "partial_link_text":
                 try:
                     e = self.driver.find_element(By.PARTIAL_LINK_TEXT, i)
                     print("The element with partial link text '" + i + "' is available.")
@@ -108,7 +130,7 @@ class Driver:
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "CSS_SELECTOR":
+            case "selector":
                 try:
                     e = self.driver.find_element(By.CSS_SELECTOR, i)
                     print("The element with CSS selector '" + i + "' is available.")
@@ -116,9 +138,25 @@ class Driver:
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
-            case "XPATH":
+            case "pselector":
+                try:
+                    e = self.driver.find_elements(By.CSS_SELECTOR, i)
+                    print("The elements with CSS selector '" + i + "' is available.")
+                    return e
+                except NoSuchElementException as err:
+                    print("Exception: " + err.msg)
+            
+            case "xpath":
                 try:
                     e = self.driver.find_element(By.XPATH, i)
+                    print("The element with XPath '" + i + "' is available.")
+                    return e
+                except NoSuchElementException as err:
+                    print("Exception: " + err.msg)
+
+            case "pxpath":
+                try:
+                    e = self.driver.find_elements(By.XPATH, i)
                     print("The element with XPath '" + i + "' is available.")
                     return e
                 except NoSuchElementException as err:

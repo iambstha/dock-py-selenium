@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="dock-py-selenium",
-    version="2.0.1",
+    version="2.1.1",
     author="Bishal Shrestha",
     author_email="iambstha@gmail.com",
     description="A startup / mockup folder for a selenium project with custom methods.",

@@ -1,4 +1,4 @@
-from dock_py_selenium.dock.dock import Driver, options
+from dock_py_selenium.dock.dock import Driver, options, Keys
 from selenium import webdriver
 
 driver = webdriver.Chrome(options=options)
@@ -25,9 +25,13 @@ try:
     billName = dock_instance.checkElement("xpath","/html/body/div[1]/div[2]/div/div/div[1]/p[2]/span")
     if billName.text == cName.text:
         print("Bill is prepared.")
+        dock_instance.checkElement("xpath","/html/body/div[1]/div[2]/div/div/div[2]/button[1]").click()
+        dock_instance.send_keys(Keys.ENTER)
     else:
         print("Some error occured.")
 except:
     print("No bill prepared.")
+
+
 
 
