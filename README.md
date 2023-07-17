@@ -24,38 +24,28 @@ This is a startup directory to write the selenium scripts in python along with s
 
 ### Example 
 ```
-    from dock_py_selenium.dock.dock import Driver, options, Keys
-    from selenium import webdriver
+from dock_py_selenium.dock.dock import Driver, options, Keys
+from selenium import webdriver
 
-    driver = webdriver.Chrome(options=options)
-    dock_instance = Driver(driver)
+driver = webdriver.Chrome(options=options)
+dock_instance = Driver(driver)
 
+# Starting the dock instance
+# This step is compulsory
+dock_instance.start()
 
-    dock_instance.start()
-    dock_instance.getTitle()
+# Getting the title of the webpage
+dock_instance.getTitle()
 
-    dock_instance.checkElement("name", "username").send_keys("angel1996")
-    dock_instance.checkElement("name", "password").send_keys("123")
-    dock_instance.checkElement("name", "login").click()
-    dock_instance.checkTitle("Kabeli Kitchen")
+# Checking whether an element with name = username is present
+dock_instance.checkElement("name", "username")
 
-    cName = dock_instance.checkElement("id","customerName")
-    cName.send_keys("Bishal Shrestha")
-    dock_instance.checkElement("id","customerNumber").send_keys("9746959090")
-    dock_instance.checkElement("id","customerLocation").send_keys("Itahari")
-    dock_instance.checkElement("id","deliveryCharge").send_keys("40")
+# Checking whether an element with name = fname is present & sending "John" as input
+dock_instance.checkElement("name", "fname").send_keys("John")
 
-    dock_instance.checkElement("id","gBill").click()
+# Checking whether an element with name = login is present & then clicking the element 
+dock_instance.checkElement("name", "login").click()
 
-    try:
-        billName = dock_instance.checkElement("xpath","/html/body/div[1]/div[2]/div/div/div[1]/p[2]/span")
-        if billName.text == cName.text:
-            print("Bill is prepared.")
-            dock_instance.checkElement("xpath","/html/body/div[1]/div[2]/div/div/div[2]/button[1]").click()
-            dock_instance.send_keys(Keys.ENTER)
-        else:
-            print("Some error occured.")
-    except:
-        print("No bill prepared.")
-
+# Checking the title of the webpage
+dock_instance.checkTitle("Dock Selenium")
 ```
