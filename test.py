@@ -23,6 +23,8 @@ dock_instance.checkElement("name", "login").click()
 # Checking the title of the webpage
 dock_instance.checkTitle("Dock Selenium")
 
+# Add a webdriver wait time
+dock_instance.wait(10)
 
 
 
