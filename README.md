@@ -7,7 +7,7 @@ This is a startup directory to write the selenium scripts in python along with s
 ### Steps.
 1. `pip install dock-py-selenium`
 2. Create a `test.py` file in your root directory and write your test scripts.
-3. Always bind any selenium script with the instance.
+3. Always bind any selenium script with the created instance.
 
 
 ## Features
