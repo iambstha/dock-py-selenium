@@ -1,7 +1,6 @@
-from dock_py_selenium.dock.dock import Driver, options, Keys
+from dock_py_selenium.dock.dock import Driver, options, Keys,driver
 from selenium import webdriver
 
-driver = webdriver.Chrome(options=options)
 dock_instance = Driver(driver)
 
 # Starting the dock instance
@@ -13,17 +12,15 @@ dock_instance.getTitle()
 
 # Checking whether an element with name = username is present
 dock_instance.checkElement("name", "username")
-
-# Checking whether an element with name = fname is present & sending "John" as input
-dock_instance.checkElement("name", "fname")
-
-# Checking whether an element with name = login is present & then clicking the element 
-dock_instance.checkElement("name", "login").click()
-
 # Checking the title of the webpage
 dock_instance.checkTitle("Dock Selenium")
 
 # Add a webdriver wait time
 dock_instance.wait(10)
+
+# Check the window's dimension
+dock_instance.dimension("h")
+dock_instance.dimension("w")
+dock_instance.dimension("hw")
 
 
