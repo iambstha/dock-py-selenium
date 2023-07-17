@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,37 +28,34 @@ class Driver:
         print(self.driver.title)
     
     # Only checks button & input of type submit
-    def checkClick(self,element):
+    def checkClick(self, element):
         cur_url = self.driver.current_url
-        match element:
-            case "button":
-                try:
-                    elem = self.driver.find_element(By.XPATH,  "//button[@type='submit']")
-                    elem.click()
-                    new_url = self.driver.current_url
-                    if cur_url != new_url:
-                        print("The button is clickable.")
-                    else:
-                        print("The button is not clickable.")
-                except NoSuchElementException as err:
-                    print("Exception: "+ err.msg)
-                except err:
-                    print("Error: " + err.msg)
-            case "input":
-                try:
-                    elem = self.driver.find_element(By.XPATH, "//input[@type='submit']")
-                    elem.click()
-                    new_url = self.driver.current_url
-                    if cur_url != new_url:
-                        print("The button is clickable.")
-                    else:
-                        print("The button is not clickable.")
-                except NoSuchElementException as err:
-                    print("Exception: "+ err.msg)
-                except err:
-                    print("Error: " + err.msg)
-            case _:
-                print("None")
+
+        if element == "button":
+            try:
+                elem = self.driver.find_element(By.XPATH, "//button[@type='submit']")
+                return lambda: self._click_button(elem, cur_url)
+            except NoSuchElementException as err:
+                print("Exception: " + err.msg)
+        elif element == "input":
+            try:
+                elem = self.driver.find_element(By.XPATH, "//input[@type='submit']")
+                return lambda: self._click_button(elem, cur_url)
+            except NoSuchElementException as err:
+                print("Exception: " + err.msg)
+        else:
+            print("Invalid element.")
+
+    def _click_button(self, button, cur_url):
+        initial_page_source = self.driver.page_source
+        button.click()
+        time.sleep(5)
+        updated_page_source = self.driver.page_source
+        
+        if initial_page_source != updated_page_source:
+            print("The button is clickable.")
+        else:
+            print("The button is not clickable.")
 
     # Checks for the availability of an element in a page
     def checkElement(self,elem,i):
@@ -66,6 +64,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.ID, i)
                     print("The element with ID '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -73,6 +72,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.NAME, i)
                     print("The element with name '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -80,6 +80,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.CLASS_NAME, i)
                     print("The element with class name '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -87,6 +88,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.TAG_NAME, i)
                     print("The element with tag name '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -94,6 +96,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.LINK_TEXT, i)
                     print("The element with link text '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -101,6 +104,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.PARTIAL_LINK_TEXT, i)
                     print("The element with partial link text '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -108,6 +112,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.CSS_SELECTOR, i)
                     print("The element with CSS selector '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
@@ -115,6 +120,7 @@ class Driver:
                 try:
                     e = self.driver.find_element(By.XPATH, i)
                     print("The element with XPath '" + i + "' is available.")
+                    return e
                 except NoSuchElementException as err:
                     print("Exception: " + err.msg)
             
