@@ -15,7 +15,7 @@ dock_instance.getTitle()
 dock_instance.checkElement("name", "username")
 
 # Checking whether an element with name = fname is present & sending "John" as input
-dock_instance.checkElement("name", "fname").send_keys("John")
+dock_instance.checkElement("name", "fname")
 
 # Checking whether an element with name = login is present & then clicking the element 
 dock_instance.checkElement("name", "login").click()
@@ -26,5 +26,4 @@ dock_instance.checkTitle("Dock Selenium")
 # Add a webdriver wait time
 dock_instance.wait(10)
 
-dock_instance.wait("10")
 
