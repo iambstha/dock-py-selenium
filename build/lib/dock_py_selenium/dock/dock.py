@@ -18,6 +18,10 @@ class Driver:
     def __init__(self, driver):
         self.driver = driver
 
+    def start(self):
+        getUrl = input("Enter the url: ")
+        self.driver.get(getUrl)
+
     # Gets the title of a webpage
     def getTitle(self):
         print(self.driver.title)
