@@ -26,5 +26,5 @@ dock_instance.checkTitle("Dock Selenium")
 # Add a webdriver wait time
 dock_instance.wait(10)
 
-
+dock_instance.wait("10")
 
